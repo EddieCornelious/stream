@@ -1,0 +1,55 @@
+.main__sidebar {
+  background: #0c0f26;
+  display: flex;
+  width: 20%;
+  float: left;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.main {
+  height: 200rem;
+}
+.main__video__container {
+  background: #171934;
+  height: 100%;
+  width: auto;
+  padding: 3rem;
+  display: flex;
+}
+
+a.sidebar__link {
+  display: block;
+  padding: 2rem;
+  background: #0c0f26;
+  width: 100%;
+
+  &:hover {
+    background: #0f0f29;
+  }
+}
+
+.game__card {
+  height: 40rem;
+
+  margin: 1rem;
+  width: 90%;
+}
+
+.game__card__top {
+  height: 80%;
+  background: blue;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.game__card__bottom {
+  height: 20%;
+  background: red;
+  color: white;
+
+  h2 {
+    margin-top: 0;
+  }
+}

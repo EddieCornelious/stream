@@ -1,0 +1,21 @@
+//@import "variables";
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html {
+  font-size: 10px;
+}
+
+body {
+  background: #7678fb;
+  color: #7678fb;
+  padding: 5rem;
+}
+a {
+  text-decoration: none !important;
+}
