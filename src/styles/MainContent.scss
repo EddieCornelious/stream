@@ -8,14 +8,19 @@
   text-align: center;
 }
 
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 .main {
-  height: 200rem;
+  height: auto;
+  background: #0c0f26;
 }
 .main__video__container {
   background: #171934;
   height: 100%;
   width: auto;
-  padding: 3rem;
+  padding: 3rem 3rem 15rem 3rem;
   display: flex;
 }
 
@@ -32,7 +37,6 @@ a.sidebar__link {
 
 .game__card {
   height: 40rem;
-
   margin: 1rem;
   width: 90%;
 }
@@ -42,14 +46,30 @@ a.sidebar__link {
   background: blue;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  background-image: url("../pubg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 .game__card__bottom {
   height: 20%;
-  background: red;
   color: white;
+  max-width: 100%;
+  padding: 1rem;
+  overflow: hidden;
 
-  h2 {
-    margin-top: 0;
+  em {
+    font-weight: 700;
+  }
+  p {
+    font-weight: 700;
+    color: #737783;
+    line-height: 2.5;
+    font-size: 1.7rem;
+  }
+
+  i {
+    margin-right: 5px;
   }
 }
