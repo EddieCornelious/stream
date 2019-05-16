@@ -13,7 +13,7 @@ class App extends React.Component {
     mode: "games"
   };
   componentDidMount() {
-    fetch("https://api.twitch.tv/helix/games/top?first=53", {
+    fetch("https://api.twitch.tv/helix/games/top?first=25", {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
