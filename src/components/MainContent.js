@@ -2,8 +2,6 @@ import "../styles/MainContent.scss";
 import React from "react";
 
 const GameCardRow = ({ data, displayStreams, mode }) => {
-  const ComponentToRender = mode === "games" ? GameCard : StreamCard;
-
   if (mode === "streams") {
     return (
       <div className="row">
@@ -88,7 +86,7 @@ const Pagination = ({ dataSize, changePage }) => {
 };
 
 const StreamCard = () => {
-  return <div>LOL STREAM</div>;
+  return <div className="stream__card">LOL STREAM</div>;
 };
 
 const MainContent = ({
@@ -96,7 +94,8 @@ const MainContent = ({
   currentPage,
   changePage,
   displayStreams,
-  mode
+  mode,
+  displayGames
 }) => {
   const lowerBound = 12 * (currentPage - 1);
   const upperBound = 12 * currentPage;
@@ -105,7 +104,7 @@ const MainContent = ({
   return (
     <div className="container-fluid main">
       <div className="main__sidebar">
-        <a className="sidebar__link" href="#">
+        <a onClick={() => displayGames()} className="sidebar__link" href="#">
           Games
         </a>
         <a className="sidebar__link" href="#">

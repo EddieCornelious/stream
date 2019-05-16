@@ -35,6 +35,12 @@ class App extends React.Component {
     });
   }
 
+  displayGames() {
+    this.setState({
+      mode: "games"
+    });
+  }
+
   changePage(page) {
     this.setState({
       currentPage: Number(page)
@@ -53,6 +59,7 @@ class App extends React.Component {
           changePage={this.changePage.bind(this)}
           displayStreams={this.displayStreams.bind(this)}
           mode={this.state.mode}
+          displayGames={this.displayGames.bind(this)}
         />
       </React.Fragment>
     );
