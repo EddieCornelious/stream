@@ -22,6 +22,7 @@
   width: auto;
   padding: 3rem 3rem 15rem 3rem;
   display: flex;
+  position: relative;
 }
 
 a.sidebar__link {
@@ -43,10 +44,8 @@ a.sidebar__link {
 
 .game__card__top {
   height: 80%;
-  background: blue;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-image: url("../pubg.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -72,4 +71,11 @@ a.sidebar__link {
   i {
     margin-right: 5px;
   }
+}
+
+.pagination {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
 }

@@ -44,7 +44,7 @@ class Header extends React.Component {
             <input
               className="header__search"
               type="text"
-              value="Search Games"
+              placeholder="Search Games"
             />
 
             <button className="search__btn" type="submit">

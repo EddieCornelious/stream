@@ -7,25 +7,53 @@ import Header from "./Header.js";
 import MainContent from "./MainContent.js";
 
 class App extends React.Component {
+  state = {
+    topGames: null,
+    currentPage: 1,
+    mode: "games"
+  };
   componentDidMount() {
-    /*
-    fetch("https://api.twitch.tv/helix/streams?game_id=33214", {
+    fetch("https://api.twitch.tv/helix/games/top?first=53", {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
     })
-      .then(function(response) {
+      .then(response => {
         return response.json();
       })
-      .then(function(myJson) {
-        console.log(myJson);
-      });**/
+      .then(games => {
+        console.log(games);
+        this.setState({
+          topGames: games.data
+        });
+      });
+  }
+
+  displayStreams(id) {
+    this.setState({
+      mode: "streams"
+    });
+  }
+
+  changePage(page) {
+    this.setState({
+      currentPage: Number(page)
+    });
   }
   render() {
+    if (!this.state.topGames) {
+      return <div>LOOADING....</div>;
+    }
     return (
       <React.Fragment>
         <Header />
-        <MainContent />
+        <MainContent
+          currentPage={this.state.currentPage}
+          data={this.state.topGames}
+          changePage={this.changePage.bind(this)}
+          displayStreams={this.displayStreams.bind(this)}
+          mode={this.state.mode}
+        />
       </React.Fragment>
     );
   }
