@@ -46,9 +46,13 @@ a.sidebar__link {
   height: 80%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
+
+  img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .game__card__bottom {
@@ -81,7 +85,75 @@ a.sidebar__link {
 }
 
 .stream__card {
-  background: white;
+  background: #171934;
   height: 30rem;
   width: 100%;
+  margin: 1rem;
+}
+
+.stream__card__top {
+  width: 100%;
+  height: 80%;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.stream__card__bottom {
+  width: 100%;
+  height: 20%;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.stream__card__right {
+  width: 80%;
+  height: 100%;
+  float: right;
+  padding: 0.5rem;
+  border-bottom: 1px solid white;
+}
+
+.stream__card__left {
+  width: 20%;
+  height: 100%;
+  float: left;
+}
+
+.pagination-lg > li > a,
+.pagination-lg > li > span {
+  background: #171934;
+  color: #7678fb;
+  border: none;
+}
+
+.stream__status {
+  color: white;
+  background: red;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  border: none;
+  text-transform: uppercase;
+}
+
+.stream__viewers {
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  display: inline-block;
+  bottom: 5%;
+  left: 5%;
+  border: none;
 }

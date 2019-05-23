@@ -1,14 +1,26 @@
 import "../styles/MainContent.scss";
 import React from "react";
+import Fade from "react-reveal/Fade";
 
 const GameCardRow = ({ data, displayStreams, mode }) => {
-  if (mode === "streams") {
+  if (mode !== "topGames") {
     return (
       <div className="row">
         {data.map((content, i) => {
+          const url = content.thumbnail_url;
           return (
-            <div className="col-sm-6 col-md-3">
-              <StreamCard />
+            <div className="col-sm-6 col-md-6">
+              <StreamCard
+                key={content.stream_id}
+                bg={url.replace("{width}x{height}", "500x300")}
+                userName={content.user_name}
+                type={content.type}
+                gameId={content.game_id}
+                streamId={content.id}
+                viewers={content.viewer_count}
+                game={content.game_played}
+                banner={content.banner}
+              />
             </div>
           );
         })}
@@ -25,9 +37,10 @@ const GameCardRow = ({ data, displayStreams, mode }) => {
             <GameCard
               id={content.id}
               displayStreams={displayStreams}
-              bg={url.replace("{width}x{height}", "300x300")}
+              bg={url.replace("{width}x{height}", "300x400")}
               key={content.id}
               name={content.name}
+              views={content.views}
             />
           </div>
         );
@@ -39,18 +52,16 @@ const GameCardRow = ({ data, displayStreams, mode }) => {
 const GameCard = props => {
   return (
     <div onClick={() => props.displayStreams(props.id)} className="game__card">
-      <div
-        style={{ backgroundImage: "url(" + props.bg + ")" }}
-        className="game__card__top"
-      >
-        &nbsp;
+      <div className="game__card__top">
+        <Fade>
+          <img alt="GAME__PHOTO" src={props.bg} />
+        </Fade>
       </div>
-
       <div className="game__card__bottom">
         <em>{props.name}</em>
         <p>
           <i className="fa fa-eye" />
-          {Math.floor(Math.random() * 100) + "k"}
+          {props.views + "K"}
         </p>
       </div>
     </div>
@@ -85,8 +96,30 @@ const Pagination = ({ dataSize, changePage }) => {
   );
 };
 
-const StreamCard = () => {
-  return <div className="stream__card">LOL STREAM</div>;
+const StreamCard = props => {
+  return (
+    <div className="stream__card">
+      <div className="stream__card__top">
+        <Fade>
+          <img src={props.bg} alt="streamer banner" />
+        </Fade>
+        <button className="stream__status">{props.type}</button>
+        <button className="stream__viewers">
+          {props.viewers.toString().substring(0, 2) + "K viewers"}
+        </button>
+      </div>
+
+      <div className="stream__card__bottom">
+        <div className="stream__card__left">
+          <img src={props.banner} alt="stream banner" />
+        </div>
+        <div className="stream__card__right">
+          <em>{props.userName}</em>
+          <p>{props.game}</p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const MainContent = ({
@@ -107,7 +140,7 @@ const MainContent = ({
         <a onClick={() => displayGames()} className="sidebar__link" href="#">
           Games
         </a>
-        <a className="sidebar__link" href="#">
+        <a onClick={() => displayStreams()} className="sidebar__link" href="#">
           Streams
         </a>
         <a className="sidebar__link" href="#">

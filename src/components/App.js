@@ -9,35 +9,103 @@ import MainContent from "./MainContent.js";
 class App extends React.Component {
   state = {
     topGames: null,
+    topStream: null,
     currentPage: 1,
-    mode: "games"
+    mode: "topGames",
+    activeData: null
   };
-  componentDidMount() {
-    fetch("https://api.twitch.tv/helix/games/top?first=25", {
+  fetchGames() {
+    return fetch("https://api.twitch.tv/helix/games/top?first=75", {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
-    })
-      .then(response => {
-        return response.json();
-      })
+    }).then(response => {
+      return response.json();
+    });
+  }
+
+  fetchStreams() {
+    return fetch("https://api.twitch.tv/helix/streams?first=75", {
+      headers: {
+        "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
+      }
+    }).then(response => {
+      return response.json();
+    });
+  }
+
+  getChannelBanner(channelIdArray) {
+    const userQuery = "id=" + channelIdArray.join("&id=");
+    return fetch("https://api.twitch.tv/helix/users?" + userQuery, {
+      headers: {
+        "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
+      }
+    }).then(response => {
+      return response.json();
+    });
+  }
+
+  componentDidMount() {
+    const gameIdMap = {};
+    const userBannerArray = [];
+    this.fetchGames()
       .then(games => {
-        console.log(games);
-        this.setState({
-          topGames: games.data
+        games.data.forEach(game => {
+          gameIdMap[game.id] = game.name;
+          game.views = Math.floor(Math.random() * 100);
         });
+        this.setState({
+          topGames: games.data,
+          activeData: games.data
+        });
+      })
+      .then(() => {
+        this.fetchStreams()
+          .then(streams => {
+            streams.data.forEach(stream => {
+              stream["game_played"] = gameIdMap[stream.game_id];
+
+              userBannerArray.push(stream.user_id);
+            });
+            return Promise.resolve(streams);
+          })
+          .then(streams => {
+            this.getChannelBanner(userBannerArray)
+              .then(banners => {
+                banners.data.forEach(banner => {
+                  streams.data.forEach((stream, i) => {
+                    stream["banner"] = banners.data[i].profile_image_url;
+                    console.log(banners);
+                  });
+                });
+                return Promise.resolve(streams);
+              })
+              .then(streams => {
+                this.setState({
+                  topStreams: streams.data
+                });
+              });
+          });
       });
   }
 
-  displayStreams(id) {
+  displayCertainStreams(gameId) {
+    console.log("display Certain Streams");
+  }
+
+  displayStreams() {
+    const streams = this.state.topStreams;
     this.setState({
-      mode: "streams"
+      mode: "topStreams",
+      activeData: streams
     });
   }
 
   displayGames() {
+    const games = this.state.topGames;
     this.setState({
-      mode: "games"
+      mode: "topGames",
+      activeData: games
     });
   }
 
@@ -47,15 +115,16 @@ class App extends React.Component {
     });
   }
   render() {
-    if (!this.state.topGames) {
+    if (!this.state.topGames || !this.state.topStreams) {
       return <div>LOOADING....</div>;
     }
+
     return (
       <React.Fragment>
         <Header />
         <MainContent
           currentPage={this.state.currentPage}
-          data={this.state.topGames}
+          data={this.state.activeData}
           changePage={this.changePage.bind(this)}
           displayStreams={this.displayStreams.bind(this)}
           mode={this.state.mode}
