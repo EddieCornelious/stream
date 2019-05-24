@@ -17,7 +17,7 @@ class App extends React.Component {
     activeData: null
   };
   fetchGames() {
-    return fetch("https://api.twitch.tv/helix/games/top?first=75", {
+    return fetch("https://api.twitch.tv/helix/games/top?first=100", {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
@@ -28,10 +28,10 @@ class App extends React.Component {
 
   fetchStreams(gameId) {
     const withID =
-      "https://api.twitch.tv/helix/streams?first=75&game_id=" + gameId;
+      "https://api.twitch.tv/helix/streams?first=100&game_id=" + gameId;
     const url = gameId
       ? withID
-      : "https://api.twitch.tv/helix/streams?first=75";
+      : "https://api.twitch.tv/helix/streams?first=100";
     return fetch(url, {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
