@@ -7,6 +7,7 @@ import Header from "./Header.js";
 import MainContent from "./MainContent.js";
 
 class App extends React.Component {
+  gameIdMap = {};
   state = {
     topGames: null,
     topStream: null,
@@ -24,8 +25,13 @@ class App extends React.Component {
     });
   }
 
-  fetchStreams() {
-    return fetch("https://api.twitch.tv/helix/streams?first=75", {
+  fetchStreams(gameId) {
+    const withID =
+      "https://api.twitch.tv/helix/streams?first=75&game_id=" + gameId;
+    const url = gameId
+      ? withID
+      : "https://api.twitch.tv/helix/streams?first=75";
+    return fetch(url, {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
@@ -45,14 +51,15 @@ class App extends React.Component {
     });
   }
 
+  fetchStreamsAndUpdateData() {}
+
   componentDidMount() {
-    const gameIdMap = {};
     const userBannerArray = [];
     this.fetchGames()
       .then(games => {
         games.data.forEach(game => {
-          gameIdMap[game.id] = game.name;
-          game.views = Math.floor(Math.random() * 100);
+          this.gameIdMap[game.id] = game.name;
+          game.viewers = Math.floor(Math.random() * 100);
         });
         this.setState({
           topGames: games.data,
@@ -63,7 +70,7 @@ class App extends React.Component {
         this.fetchStreams()
           .then(streams => {
             streams.data.forEach(stream => {
-              stream["game_played"] = gameIdMap[stream.game_id];
+              stream["game_played"] = this.gameIdMap[stream.game_id];
 
               userBannerArray.push(stream.user_id);
             });
@@ -72,12 +79,10 @@ class App extends React.Component {
           .then(streams => {
             this.getChannelBanner(userBannerArray)
               .then(banners => {
-                banners.data.forEach(banner => {
-                  streams.data.forEach((stream, i) => {
-                    stream["banner"] = banners.data[i].profile_image_url;
-                    console.log(banners);
-                  });
+                streams.data.forEach((stream, i) => {
+                  stream["banner"] = banners.data[i].profile_image_url;
                 });
+
                 return Promise.resolve(streams);
               })
               .then(streams => {
@@ -90,7 +95,30 @@ class App extends React.Component {
   }
 
   displayCertainStreams(gameId) {
-    console.log("display Certain Streams");
+    const userBannerArray = [];
+    this.fetchStreams(gameId)
+      .then(streams => {
+        streams.data.forEach(stream => {
+          stream["game_played"] = this.gameIdMap[stream.game_id];
+          userBannerArray.push(stream.user_id);
+        });
+        return Promise.resolve(streams);
+      })
+      .then(streams => {
+        this.getChannelBanner(userBannerArray)
+          .then(banners => {
+            streams.data.forEach((stream, i) => {
+              stream["banner"] = banners.data[i].profile_image_url;
+            });
+            return Promise.resolve(streams);
+          })
+          .then(streams => {
+            this.setState({
+              mode: "topStreams",
+              activeData: streams.data
+            });
+          });
+      });
   }
 
   displayStreams() {
@@ -129,6 +157,7 @@ class App extends React.Component {
           displayStreams={this.displayStreams.bind(this)}
           mode={this.state.mode}
           displayGames={this.displayGames.bind(this)}
+          displayCertainStreams={this.displayCertainStreams.bind(this)}
         />
       </React.Fragment>
     );

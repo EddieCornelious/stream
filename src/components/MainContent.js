@@ -2,14 +2,14 @@ import "../styles/MainContent.scss";
 import React from "react";
 import Fade from "react-reveal/Fade";
 
-const GameCardRow = ({ data, displayStreams, mode }) => {
+const GameCardRow = ({ data, displayStreams, mode, displayCertainStreams }) => {
   if (mode !== "topGames") {
     return (
       <div className="row">
         {data.map((content, i) => {
           const url = content.thumbnail_url;
           return (
-            <div className="col-sm-6 col-md-6">
+            <div key={i} className="col-sm-6 col-md-6">
               <StreamCard
                 key={content.stream_id}
                 bg={url.replace("{width}x{height}", "500x300")}
@@ -33,14 +33,15 @@ const GameCardRow = ({ data, displayStreams, mode }) => {
       {data.map((content, i) => {
         const url = content.box_art_url;
         return (
-          <div className="col-sm-6 col-md-3">
+          <div key={i} className="col-sm-6 col-md-3">
             <GameCard
               id={content.id}
               displayStreams={displayStreams}
               bg={url.replace("{width}x{height}", "300x400")}
               key={content.id}
               name={content.name}
-              views={content.views}
+              viewers={content.viewers}
+              displayCertainStreams={displayCertainStreams}
             />
           </div>
         );
@@ -51,8 +52,11 @@ const GameCardRow = ({ data, displayStreams, mode }) => {
 
 const GameCard = props => {
   return (
-    <div onClick={() => props.displayStreams(props.id)} className="game__card">
-      <div className="game__card__top">
+    <div className="game__card">
+      <div
+        onClick={() => props.displayCertainStreams(props.id)}
+        className="game__card__top"
+      >
         <Fade>
           <img alt="GAME__PHOTO" src={props.bg} />
         </Fade>
@@ -61,38 +65,10 @@ const GameCard = props => {
         <em>{props.name}</em>
         <p>
           <i className="fa fa-eye" />
-          {props.views + "K"}
+          {props.viewers + "K"}
         </p>
       </div>
     </div>
-  );
-};
-
-const Pagination = ({ dataSize, changePage }) => {
-  const pagin = [];
-  for (let i = 0; i < Math.ceil(dataSize / 12); i++) {
-    pagin.push(
-      <li onClick={() => changePage(i + 1)} key={i}>
-        <a href="#">{i + 1}</a>
-      </li>
-    );
-  }
-  return (
-    <nav aria-label="Page navigation">
-      <ul className="pagination pagination-lg">
-        <li>
-          <a href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        {pagin}
-        <li>
-          <a href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
   );
 };
 
@@ -122,18 +98,32 @@ const StreamCard = props => {
   );
 };
 
+function renderData(dataToRender, mode, displayStreams, displayCertainStreams) {
+  const renderedData = [];
+
+  for (let i = 0; i < dataToRender.length; i += 4) {
+    renderedData.push(
+      <GameCardRow
+        key={i}
+        mode={mode}
+        displayStreams={displayStreams}
+        data={dataToRender.slice(i, i + 4)}
+        displayCertainStreams={displayCertainStreams}
+      />
+    );
+  }
+  return renderedData;
+}
+
 const MainContent = ({
   data,
   currentPage,
   changePage,
   displayStreams,
   mode,
-  displayGames
+  displayGames,
+  displayCertainStreams
 }) => {
-  const lowerBound = 12 * (currentPage - 1);
-  const upperBound = 12 * currentPage;
-  const pageData = data.slice(lowerBound, upperBound);
-
   return (
     <div className="container-fluid main">
       <div className="main__sidebar">
@@ -144,7 +134,7 @@ const MainContent = ({
           Streams
         </a>
         <a className="sidebar__link" href="#">
-          A
+          Sort
         </a>
         <a className="sidebar__link" href="#">
           A
@@ -153,26 +143,7 @@ const MainContent = ({
 
       <div className="main__video__container">
         <div className="container">
-          <GameCardRow
-            mode={mode}
-            displayStreams={displayStreams}
-            data={pageData.slice(0, 4)}
-          />
-          <GameCardRow
-            mode={mode}
-            displayStreams={displayStreams}
-            data={pageData.slice(4, 8)}
-          />
-          <GameCardRow
-            mode={mode}
-            displayStreams={displayStreams}
-            data={pageData.slice(8, 12)}
-          />
-          <Pagination
-            displayStreams={displayStreams}
-            changePage={changePage}
-            dataSize={data.length}
-          />
+          {renderData(data, mode, displayStreams, displayCertainStreams)}
         </div>
       </div>
     </div>
