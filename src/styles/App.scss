@@ -19,3 +19,8 @@ body {
 a {
   text-decoration: none !important;
 }
+
+html,
+body {
+  transition: scrollTo 3s ease;
+}
