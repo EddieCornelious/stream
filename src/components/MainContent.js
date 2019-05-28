@@ -2,7 +2,13 @@ import "../styles/MainContent.scss";
 import React from "react";
 import Fade from "react-reveal/Fade";
 
-const GameCardRow = ({ data, displayStreams, mode, displayCertainStreams }) => {
+const GameCardRow = ({
+  data,
+  displayStreams,
+  mode,
+  displayCertainStreams,
+  toggleStreamVideo
+}) => {
   if (mode !== "topGames") {
     return (
       <div className="row">
@@ -11,6 +17,7 @@ const GameCardRow = ({ data, displayStreams, mode, displayCertainStreams }) => {
           return (
             <div key={i} className="col-sm-6 col-md-6">
               <StreamCard
+                toggleStreamVideo={toggleStreamVideo}
                 key={content.stream_id}
                 bg={url.replace("{width}x{height}", "500x300")}
                 userName={content.user_name}
@@ -74,7 +81,10 @@ const GameCard = props => {
 
 const StreamCard = props => {
   return (
-    <div className="stream__card">
+    <div
+      onClick={() => props.toggleStreamVideo(props.userName)}
+      className="stream__card"
+    >
       <div className="stream__card__top">
         <Fade>
           <img src={props.bg} alt="streamer banner" />
@@ -98,7 +108,13 @@ const StreamCard = props => {
   );
 };
 
-function renderData(dataToRender, mode, displayStreams, displayCertainStreams) {
+function renderData(
+  dataToRender,
+  mode,
+  displayStreams,
+  displayCertainStreams,
+  toggleStreamVideo
+) {
   const renderedData = [];
 
   for (let i = 0; i < dataToRender.length; i += 4) {
@@ -106,6 +122,7 @@ function renderData(dataToRender, mode, displayStreams, displayCertainStreams) {
       <GameCardRow
         key={i}
         mode={mode}
+        toggleStreamVideo={toggleStreamVideo}
         displayStreams={displayStreams}
         data={dataToRender.slice(i, i + 4)}
         displayCertainStreams={displayCertainStreams}
@@ -122,7 +139,8 @@ const MainContent = ({
   displayStreams,
   mode,
   displayGames,
-  displayCertainStreams
+  displayCertainStreams,
+  toggleStreamVideo
 }) => {
   return (
     <div className="container-fluid main">
@@ -143,7 +161,13 @@ const MainContent = ({
 
       <div className="main__video__container">
         <div className="container">
-          {renderData(data, mode, displayStreams, displayCertainStreams)}
+          {renderData(
+            data,
+            mode,
+            displayStreams,
+            displayCertainStreams,
+            toggleStreamVideo
+          )}
         </div>
       </div>
     </div>

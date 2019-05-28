@@ -5,8 +5,8 @@ import "../styles/App.scss";
 import React from "react";
 import Header from "./Header.js";
 import MainContent from "./MainContent.js";
+import VideoPlayer from "./VideoPlayer.js";
 
-function A() {}
 class App extends React.Component {
   gameIdMap = {};
   state = {
@@ -14,10 +14,12 @@ class App extends React.Component {
     topStream: null,
     currentPage: 1,
     mode: "topGames",
-    activeData: null
+    activeData: null,
+    shouldShowPlayer: false,
+    liveStreamer: null
   };
   fetchGames() {
-    return fetch("https://api.twitch.tv/helix/games/top?first=100", {
+    return fetch("https://api.twitch.tv/helix/games/top?first=15", {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
@@ -28,10 +30,10 @@ class App extends React.Component {
 
   fetchStreams(gameId) {
     const withID =
-      "https://api.twitch.tv/helix/streams?first=100&game_id=" + gameId;
+      "https://api.twitch.tv/helix/streams?first=15&game_id=" + gameId;
     const url = gameId
       ? withID
-      : "https://api.twitch.tv/helix/streams?first=100";
+      : "https://api.twitch.tv/helix/streams?first=15";
     return fetch(url, {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
@@ -94,6 +96,7 @@ class App extends React.Component {
       return Promise.resolve(streams);
     });
   }
+
   displayCertainStreams(gameId) {
     const userBannerArray = [];
     this.fetchStreams(gameId)
@@ -108,7 +111,7 @@ class App extends React.Component {
         this.getBannerAndUpdateStreams(streams, userBannerArray).then(
           streams => {
             this.setState({
-              mode: "topStreams",
+              mode: "certainStreams",
               activeData: streams.data
             });
           }
@@ -139,6 +142,21 @@ class App extends React.Component {
       currentPage: Number(page)
     });
   }
+
+  showStream(streamerName) {
+    this.setState({
+      shouldShowPlayer: true,
+      liveStreamer: streamerName
+    });
+  }
+
+  closeStream() {
+    this.setState({
+      shouldShowPlayer: false,
+      liveStreamer: null
+    });
+  }
+
   render() {
     if (!this.state.topGames || !this.state.topStreams) {
       return <div>LOOADING....</div>;
@@ -147,7 +165,13 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Header />
+        <VideoPlayer
+          liveStreamer={this.state.liveStreamer}
+          shouldShow={this.state.shouldShowPlayer}
+          closeStream={this.closeStream.bind(this)}
+        />
         <MainContent
+          toggleStreamVideo={this.showStream.bind(this)}
           currentPage={this.state.currentPage}
           data={this.state.activeData}
           changePage={this.changePage.bind(this)}
