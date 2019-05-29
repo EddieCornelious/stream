@@ -46,7 +46,7 @@ const GameCardRow = ({
               displayStreams={displayStreams}
               bg={url.replace("{width}x{height}", "300x400")}
               key={content.id}
-              name={content.name}
+              game={content.name}
               viewers={content.viewers}
               displayCertainStreams={displayCertainStreams}
             />
@@ -69,7 +69,7 @@ const GameCard = props => {
         </Fade>
       </div>
       <div className="game__card__bottom">
-        <em>{props.name}</em>
+        <em>{props.game}</em>
         <p>
           <i className="fa fa-eye" />
           {props.viewers + "K"}
@@ -134,8 +134,6 @@ function renderData(
 
 const MainContent = ({
   data,
-  currentPage,
-  changePage,
   displayStreams,
   mode,
   displayGames,

@@ -11,15 +11,14 @@ class App extends React.Component {
   gameIdMap = {};
   state = {
     topGames: null,
-    topStream: null,
-    currentPage: 1,
+    topStreams: null,
     mode: "topGames",
     activeData: null,
     shouldShowPlayer: false,
     liveStreamer: null
   };
   fetchGames() {
-    return fetch("https://api.twitch.tv/helix/games/top?first=15", {
+    return fetch("https://api.twitch.tv/helix/games/top?first=100", {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
@@ -30,10 +29,10 @@ class App extends React.Component {
 
   fetchStreams(gameId) {
     const withID =
-      "https://api.twitch.tv/helix/streams?first=15&game_id=" + gameId;
+      "https://api.twitch.tv/helix/streams?first=100&game_id=" + gameId;
     const url = gameId
       ? withID
-      : "https://api.twitch.tv/helix/streams?first=15";
+      : "https://api.twitch.tv/helix/streams?first=100";
     return fetch(url, {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
@@ -137,12 +136,6 @@ class App extends React.Component {
     });
   }
 
-  changePage(page) {
-    this.setState({
-      currentPage: Number(page)
-    });
-  }
-
   showStream(streamerName) {
     this.setState({
       shouldShowPlayer: true,
@@ -157,6 +150,32 @@ class App extends React.Component {
     });
   }
 
+  filterData(stringToMatch) {
+    if (this.state.mode === "certainStreams") {
+      return;
+    }
+    const stringToMatch_LC = stringToMatch.toLowerCase();
+    if (stringToMatch_LC === "") {
+      this.state.mode === "topGames"
+        ? this.displayGames()
+        : this.displayStreams();
+      return;
+    }
+    const dataToFilterProp =
+      this.state.mode === "topGames" ? "topGames" : "topStreams";
+    const dataToFilter = this.state[dataToFilterProp];
+
+    const contentProp = this.state.mode === "topGames" ? "name" : "game_played";
+    const newData = dataToFilter.filter(e => {
+      return e[contentProp.toString()]
+        .toLowerCase()
+        .startsWith(stringToMatch_LC);
+    });
+    this.setState({
+      activeData: newData
+    });
+  }
+
   render() {
     if (!this.state.topGames || !this.state.topStreams) {
       return <div>LOOADING....</div>;
@@ -164,7 +183,7 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <Header />
+        <Header filterData={this.filterData.bind(this)} />
         <VideoPlayer
           liveStreamer={this.state.liveStreamer}
           shouldShow={this.state.shouldShowPlayer}
@@ -174,7 +193,6 @@ class App extends React.Component {
           toggleStreamVideo={this.showStream.bind(this)}
           currentPage={this.state.currentPage}
           data={this.state.activeData}
-          changePage={this.changePage.bind(this)}
           displayStreams={this.displayStreams.bind(this)}
           mode={this.state.mode}
           displayGames={this.displayGames.bind(this)}

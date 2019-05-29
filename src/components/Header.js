@@ -33,6 +33,22 @@ const DropDown = props => {
     </div>
   );
 };
+
+class GameSearchBar extends React.Component {
+  handleChange(e) {
+    this.props.filterData(e.target.value);
+  }
+  render() {
+    return (
+      <input
+        onChange={this.handleChange.bind(this)}
+        className="header__search"
+        type="text"
+        placeholder="Search Games"
+      />
+    );
+  }
+}
 class Header extends React.Component {
   render() {
     return (
@@ -41,11 +57,7 @@ class Header extends React.Component {
           <h1 className="brand">Dashboard Box</h1>
 
           <form className="search__form">
-            <input
-              className="header__search"
-              type="text"
-              placeholder="Search Games"
-            />
+            <GameSearchBar filterData={this.props.filterData} />
 
             <button className="search__btn" type="submit">
               <i className="fa fa-search">&nbsp;</i>
