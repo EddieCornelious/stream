@@ -59,7 +59,7 @@ class App extends React.Component {
       .then(games => {
         games.data.forEach(game => {
           this.gameIdMap[game.id] = game.name;
-          game.viewers = Math.floor(Math.random() * 100);
+          game.viewers = Math.floor(1 + Math.random() * 80);
         });
         this.setState({
           topGames: games.data,
@@ -163,16 +163,36 @@ class App extends React.Component {
     }
     const dataToFilterProp =
       this.state.mode === "topGames" ? "topGames" : "topStreams";
-    const dataToFilter = this.state[dataToFilterProp];
-
+    const dataToFilter = this.state[dataToFilterProp.toString()];
     const contentProp = this.state.mode === "topGames" ? "name" : "game_played";
+
     const newData = dataToFilter.filter(e => {
-      return e[contentProp.toString()]
-        .toLowerCase()
-        .startsWith(stringToMatch_LC);
+      if (!e[contentProp]) {
+        return;
+      }
+      return e[contentProp].toLowerCase().startsWith(stringToMatch_LC);
     });
     this.setState({
       activeData: newData
+    });
+  }
+
+  sortData(type = "desc") {
+    const propWanted =
+      this.state.mode === "topStreams" || this.state.mode === "certainStreams"
+        ? "viewer_count"
+        : "viewers";
+    function comp(a, b) {
+      if (a[propWanted] < b[propWanted]) {
+        return type === "desc" ? 1 : -1;
+      }
+      if (a[propWanted] > b[propWanted]) {
+        return type === "desc" ? -1 : 1;
+      }
+      return 0;
+    }
+    this.setState({
+      activeData: this.state.activeData.sort(comp)
     });
   }
 
@@ -183,7 +203,10 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <Header filterData={this.filterData.bind(this)} />
+        <Header
+          sortData={this.sortData.bind(this)}
+          filterData={this.filterData.bind(this)}
+        />
         <VideoPlayer
           liveStreamer={this.state.liveStreamer}
           shouldShow={this.state.shouldShowPlayer}

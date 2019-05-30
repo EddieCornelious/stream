@@ -5,7 +5,7 @@
   float: left;
   height: 100%;
   flex-direction: column;
-  text-align: center;
+  font-size: 1.6rem;
 }
 
 .container-fluid {
@@ -30,6 +30,7 @@ a.sidebar__link {
   padding: 2rem;
   background: #0c0f26;
   width: 100%;
+  color: #7678fb;
 
   &:hover {
     background: #0f0f29;

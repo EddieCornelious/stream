@@ -1,7 +1,7 @@
 import "../styles/MainContent.scss";
 import React from "react";
 import Fade from "react-reveal/Fade";
-
+import { toKViewers } from "./util.js";
 const GameCardRow = ({
   data,
   displayStreams,
@@ -15,7 +15,7 @@ const GameCardRow = ({
         {data.map((content, i) => {
           const url = content.thumbnail_url;
           return (
-            <div key={i} className="col-sm-6 col-md-6">
+            <div key={i} className="col-md-6">
               <StreamCard
                 toggleStreamVideo={toggleStreamVideo}
                 key={content.stream_id}
@@ -91,7 +91,7 @@ const StreamCard = props => {
         </Fade>
         <button className="stream__status">{props.type}</button>
         <button className="stream__viewers">
-          {props.viewers.toString().substring(0, 2) + "K viewers"}
+          {toKViewers(props.viewers) + " viewers"}
         </button>
       </div>
 
@@ -144,16 +144,10 @@ const MainContent = ({
     <div className="container-fluid main">
       <div className="main__sidebar">
         <a onClick={() => displayGames()} className="sidebar__link" href="#">
-          Games
+          Top Games
         </a>
         <a onClick={() => displayStreams()} className="sidebar__link" href="#">
-          Streams
-        </a>
-        <a className="sidebar__link" href="#">
-          Sort
-        </a>
-        <a className="sidebar__link" href="#">
-          A
+          Top Streams
         </a>
       </div>
 

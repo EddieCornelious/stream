@@ -12,12 +12,14 @@
     width: 30%;
     margin: 0 auto;
   }
-  h1.brand {
+  div.brand {
     color: #faca31;
-    display: inline;
-    padding: 1rem;
+    display: flex;
+    padding: 3rem;
+    font-size: 2rem;
     border: 2px solid #faca31;
     margin: 0;
+    align-items: center;
   }
 
   input.header__search {
@@ -53,4 +55,34 @@
   height: 100%;
   border: none;
   color: inherit;
+  padding: 0 5.7rem;
+
+  &:active {
+    background: #1c223a;
+    color: inherit;
+  }
+
+  &:hover {
+    background: #1c223a;
+    color: inherit;
+  }
+
+  &:focus {
+    background: #1c223a;
+    color: inherit;
+  }
+}
+
+ul.dropdown-menu {
+  background: #1c223a;
+  text-align: center;
+}
+.dropdown-menu > li > a {
+  color: inherit;
+  background: #1c223a;
+
+  &:hover {
+    background: #0c0f26;
+    color: inherit;
+  }
 }

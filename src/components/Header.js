@@ -12,22 +12,15 @@ const DropDown = props => {
         aria-haspopup="true"
         aria-expanded="true"
       >
-        Dropdown
+        Sort By
       </button>
 
       <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li>
-          <a href="#">Action</a>
+        <li onClick={() => props.sortData("desc")}>
+          <a href="#">Most Viewed</a>
         </li>
-        <li>
-          <a href="#">Another action</a>
-        </li>
-        <li>
-          <a href="#">Something else here</a>
-        </li>
-        <li role="separator" className="divider" />
-        <li>
-          <a href="#">Separated link</a>
+        <li onClick={() => props.sortData("asc")}>
+          <a href="#">Least Viewed</a>
         </li>
       </ul>
     </div>
@@ -54,7 +47,9 @@ class Header extends React.Component {
     return (
       <div className="container-fluid">
         <div className="header">
-          <h1 className="brand">Dashboard Box</h1>
+          <div className="brand">
+            <em>Dashboard Box</em>
+          </div>
 
           <form className="search__form">
             <GameSearchBar filterData={this.props.filterData} />
@@ -63,7 +58,7 @@ class Header extends React.Component {
               <i className="fa fa-search">&nbsp;</i>
             </button>
           </form>
-          <DropDown />
+          <DropDown sortData={this.props.sortData} />
         </div>
       </div>
     );
