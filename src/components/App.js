@@ -6,6 +6,7 @@ import React from "react";
 import Header from "./Header.js";
 import MainContent from "./MainContent.js";
 import VideoPlayer from "./VideoPlayer.js";
+import { mergesort, genGameViews, toKViewers } from "./util.js";
 
 class App extends React.Component {
   gameIdMap = {};
@@ -55,11 +56,12 @@ class App extends React.Component {
 
   componentDidMount() {
     const userBannerArray = [];
+    const generator = genGameViews();
     this.fetchGames()
       .then(games => {
         games.data.forEach(game => {
           this.gameIdMap[game.id] = game.name;
-          game.viewers = Math.floor(1 + Math.random() * 80);
+          game.viewers = generator.gen();
         });
         this.setState({
           topGames: games.data,
@@ -85,6 +87,7 @@ class App extends React.Component {
             );
           });
       });
+    generator.cancel();
   }
 
   getBannerAndUpdateStreams(streams, userBannerArray) {
@@ -192,7 +195,7 @@ class App extends React.Component {
       return 0;
     }
     this.setState({
-      activeData: this.state.activeData.sort(comp)
+      activeData: mergesort(this.state.activeData, comp)
     });
   }
 

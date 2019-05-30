@@ -72,7 +72,7 @@ const GameCard = props => {
         <em>{props.game}</em>
         <p>
           <i className="fa fa-eye" />
-          {props.viewers + "K"}
+          {toKViewers(props.viewers)}
         </p>
       </div>
     </div>
