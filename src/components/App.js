@@ -17,7 +17,8 @@ class App extends React.Component {
     activeData: null,
     shouldShowPlayer: false,
     liveStreamer: null,
-    isLoading: true
+    loadingApp: true,
+    loadingData: false
   };
   fetchGames() {
     return fetch("https://api.twitch.tv/helix/games/top?first=100", {
@@ -83,7 +84,7 @@ class App extends React.Component {
               streams => {
                 this.setState({
                   topStreams: streams.data,
-                  isLoading: false
+                  loadingApp: false
                 });
               }
             );
@@ -103,6 +104,9 @@ class App extends React.Component {
 
   displayCertainStreams(gameId) {
     const userBannerArray = [];
+    this.setState({
+      loadingData: true
+    });
     this.fetchStreams(gameId)
       .then(streams => {
         streams.data.forEach(stream => {
@@ -116,7 +120,8 @@ class App extends React.Component {
           streams => {
             this.setState({
               mode: "certainStreams",
-              activeData: streams.data
+              activeData: streams.data,
+              loadingData: false
             });
           }
         );
@@ -202,7 +207,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+    if (this.state.loadingApp) {
       return null;
     }
 
@@ -225,6 +230,7 @@ class App extends React.Component {
           mode={this.state.mode}
           displayGames={this.displayGames.bind(this)}
           displayCertainStreams={this.displayCertainStreams.bind(this)}
+          loadingData={this.state.loadingData}
         />
       </React.Fragment>
     );

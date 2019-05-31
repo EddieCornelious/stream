@@ -138,7 +138,8 @@ const MainContent = ({
   mode,
   displayGames,
   displayCertainStreams,
-  toggleStreamVideo
+  toggleStreamVideo,
+  loadingData
 }) => {
   return (
     <div className="container-fluid main">
@@ -152,14 +153,16 @@ const MainContent = ({
       </div>
 
       <div className="main__video__container">
-        <div className="container">
-          {renderData(
-            data,
-            mode,
-            displayStreams,
-            displayCertainStreams,
-            toggleStreamVideo
-          )}
+        <div className="loader__small container">
+          {loadingData
+            ? null
+            : renderData(
+                data,
+                mode,
+                displayStreams,
+                displayCertainStreams,
+                toggleStreamVideo
+              )}
         </div>
       </div>
     </div>
