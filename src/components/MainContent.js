@@ -11,11 +11,11 @@ const GameCardRow = ({
 }) => {
   if (mode !== "topGames") {
     return (
-      <div className="row">
+      <React.Fragment>
         {data.map((content, i) => {
           const url = content.thumbnail_url;
           return (
-            <div key={i} className="col-md-6">
+            <div key={i} className="col-md-6 col-lg-4">
               <StreamCard
                 toggleStreamVideo={toggleStreamVideo}
                 key={content.stream_id}
@@ -31,7 +31,7 @@ const GameCardRow = ({
             </div>
           );
         })}
-      </div>
+      </React.Fragment>
     );
   }
 
