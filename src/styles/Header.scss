@@ -1,0 +1,88 @@
+.header {
+  background: #0c0f26;
+  display: flex;
+  padding: 2rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  position: relative;
+  align-items: stretch;
+  height: 10rem;
+
+  form {
+    width: 30%;
+    margin: 0 auto;
+  }
+  div.brand {
+    color: #faca31;
+    display: flex;
+    padding: 3rem;
+    font-size: 2rem;
+    border: 2px solid #faca31;
+    margin: 0;
+    align-items: center;
+  }
+
+  input.header__search {
+    background: #1c223a;
+    width: 85%;
+    border-style: none;
+
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    padding: 1rem;
+    height: 100%;
+  }
+
+  button.search__btn {
+    display: inline-block;
+    height: 100%;
+    width: 15%;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    text-align: center;
+    border-style: none;
+    background: #1c223a;
+    padding: 1rem;
+
+    i {
+      font-size: 18px;
+    }
+  }
+}
+
+.btn.btn-default.dropdown-toggle {
+  background: #1c223a;
+  height: 100%;
+  border: none;
+  color: inherit;
+  width: 16rem;
+
+  &:active {
+    background: #1c223a;
+    color: inherit;
+  }
+
+  &:hover {
+    background: #1c223a;
+    color: inherit;
+  }
+
+  &:focus {
+    background: #1c223a;
+    color: inherit;
+  }
+}
+
+ul.dropdown-menu {
+  background: #1c223a;
+  text-align: center;
+}
+.dropdown-menu > li > a {
+  color: inherit;
+  background: #1c223a;
+
+  &:hover {
+    background: #0c0f26;
+    color: inherit;
+  }
+}
