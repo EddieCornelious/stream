@@ -16,6 +16,7 @@ body {
   color: #7678fb;
   padding: 5rem;
   overflow-x: hidden;
+  position: relative;
 }
 a {
   text-decoration: none !important;
@@ -38,6 +39,7 @@ body {
   position: absolute;
   left: 50%;
   top: 30%;
+  transform: translate(-50%, 0);
 }
 
 .loader__small:empty {

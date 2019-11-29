@@ -23,6 +23,7 @@
   padding: 3rem 3rem 15rem 3rem;
   display: flex;
   position: relative;
+  min-height: 100vh;
 }
 
 a.sidebar__link {
@@ -43,23 +44,21 @@ a.sidebar__link {
   width: 90%;
   cursor: pointer;
   backface-visibility: hidden;
-  transition: transform 0.3s ease;
+  overflow: hidden;
+  border-radius: 1rem;
 }
 
 .game__card__top {
   height: 80%;
-  backface-visibility: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.04, 1.04);
+    transform: scale(1.02, 1.02);
   }
   img {
     object-fit: cover;
     object-position: center;
     width: 100%;
     height: 100%;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
   }
 }
 
