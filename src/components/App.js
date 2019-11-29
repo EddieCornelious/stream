@@ -8,7 +8,7 @@ import MainContent from "./MainContent.js";
 import VideoPlayer from "./VideoPlayer.js";
 import { mergesort, genGameViews, toKViewers } from "./util.js";
 
-const ID = "etc4by2ti074ihuwet11y9kvbdyh7d";
+//process.env.REACT_APP_TWITCH_CLIENT_ID || ID
 
 class App extends React.Component {
   gameIdMap = {};
@@ -25,7 +25,7 @@ class App extends React.Component {
   fetchGames() {
     return fetch("https://api.twitch.tv/helix/games/top?first=100", {
       headers: {
-        "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID || ID
+        "Client-ID": "etc4by2ti074ihuwet11y9kvbdyh7d"
       }
     }).then(response => {
       return response.json();
