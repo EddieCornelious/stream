@@ -14,7 +14,7 @@ import debounce from "lodash.debounce";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    this.cursor = null;
     this.gameIdMap = {};
     this.state = {
       topGames: null,
@@ -29,18 +29,37 @@ class App extends React.Component {
 
     window.onscroll = debounce(() => {
       if (
-        window.innerHeight + window.scrollY / document.body.offsetHeight ===
-        0
+        window.innerHeight + window.scrollY >=
+        document.querySelector(".main__video__container").offsetHeight
       ) {
-        console.log("999999");
+        if (this.state.mode === "topGames") {
+          this.loadMore();
+        }
       }
     }, 100);
   }
 
-  fetchGames() {
-    return fetch("https://api.twitch.tv/helix/games/top?first=100", {
+  loadMore() {
+    const generator = genGameViews();
+    this.fetchGames(
+      "https://api.twitch.tv/helix/games/top?first=10&after=" + this.cursor
+    ).then(games => {
+      this.cursor = games.pagination.cursor;
+      games.data.forEach(game => {
+        this.gameIdMap[game.id] = game.name;
+        game.viewers = generator.gen();
+      });
+      this.setState({
+        topGames: [...this.state.topGames, ...games.data],
+        activeData: [...this.state.activeData, ...games.data]
+      });
+    });
+  }
+
+  fetchGames(url) {
+    return fetch(url || "https://api.twitch.tv/helix/games/top?first=100", {
       headers: {
-        "Client-ID": "etc4by2ti074ihuwet11y9kvbdyh7d"
+        "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
     }).then(response => {
       return response.json();
@@ -78,6 +97,7 @@ class App extends React.Component {
     const generator = genGameViews();
     this.fetchGames()
       .then(games => {
+        this.cursor = games.pagination.cursor;
         games.data.forEach(game => {
           this.gameIdMap[game.id] = game.name;
           game.viewers = generator.gen();
@@ -107,7 +127,6 @@ class App extends React.Component {
             );
           });
       });
-    generator.cancel();
   }
 
   getBannerAndUpdateStreams(streams, userBannerArray) {
@@ -237,6 +256,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.activeData);
     if (this.state.loadingApp) {
       return null;
     }
