@@ -37,6 +37,8 @@ class App extends React.Component {
         }
       }
     }, 100);
+
+    window.touchmove = window.onscroll;
   }
 
   loadMore() {
@@ -127,6 +129,7 @@ class App extends React.Component {
             );
           });
       });
+    generator.cancel();
   }
 
   getBannerAndUpdateStreams(streams, userBannerArray) {
@@ -256,7 +259,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.activeData);
     if (this.state.loadingApp) {
       return null;
     }
