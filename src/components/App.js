@@ -7,21 +7,36 @@ import Header from "./Header.js";
 import MainContent from "./MainContent.js";
 import VideoPlayer from "./VideoPlayer.js";
 import { mergesort, genGameViews, toKViewers } from "./util.js";
+import debounce from "lodash.debounce";
 
 //process.env.REACT_APP_TWITCH_CLIENT_ID || ID
 
 class App extends React.Component {
-  gameIdMap = {};
-  state = {
-    topGames: null,
-    topStreams: null,
-    mode: "topGames",
-    activeData: null,
-    shouldShowPlayer: false,
-    liveStreamer: null,
-    loadingApp: true,
-    loadingData: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.gameIdMap = {};
+    this.state = {
+      topGames: null,
+      topStreams: null,
+      mode: "topGames",
+      activeData: null,
+      shouldShowPlayer: false,
+      liveStreamer: null,
+      loadingApp: true,
+      loadingData: false
+    };
+
+    window.onscroll = debounce(() => {
+      if (
+        window.innerHeight + window.scrollY / document.body.offsetHeight ===
+        0
+      ) {
+        console.log("999999");
+      }
+    }, 100);
+  }
+
   fetchGames() {
     return fetch("https://api.twitch.tv/helix/games/top?first=100", {
       headers: {
@@ -215,6 +230,7 @@ class App extends React.Component {
       }
       return 0;
     }
+
     this.setState({
       activeData: mergesort(this.state.activeData, comp)
     });
