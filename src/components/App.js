@@ -27,7 +27,7 @@ class App extends React.Component {
       loadingData: false
     };
 
-    window.onscroll = debounce(() => {
+    const scrollCheck = debounce(() => {
       if (
         window.innerHeight + window.scrollY >=
         document.querySelector(".main__video__container").offsetHeight
@@ -38,7 +38,9 @@ class App extends React.Component {
       }
     }, 100);
 
-    window.touchmove = window.onscroll;
+    window.addEventListener("scroll", scrollCheck, false);
+
+    window.addEventListener("touchmove", scrollCheck, false);
   }
 
   loadMore() {
