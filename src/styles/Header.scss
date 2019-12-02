@@ -1,3 +1,5 @@
+@import "responsive";
+
 .header {
   background: #0c0f26;
   display: -webkit-box;
@@ -14,9 +16,20 @@
   align-items: stretch;
   height: 10rem;
 
+  @include respond(phone){
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
   form {
     width: 30%;
     margin: 0 auto;
+
+    @include respond(phone){
+      width: 40%;
+      margin: 0;
+    }
   }
   div.brand {
     color: #faca31;
@@ -32,6 +45,10 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+
+    @include respond(phone){
+      display: none;
+    }
   }
 
   input.header__search {
@@ -43,6 +60,10 @@
     border-bottom-left-radius: 2rem;
     padding: 1rem;
     height: 100%;
+
+    @include respond(phone){
+      width: 75%;
+    }
   }
 
   button.search__btn {
@@ -55,6 +76,10 @@
     border-style: none;
     background: #1c223a;
     padding: 1rem;
+
+    @include respond(phone){
+      width: 25%;
+    }
 
     i {
       font-size: 18px;

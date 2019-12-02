@@ -1,4 +1,6 @@
 //@import "variables";
+@import "responsive.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +11,23 @@
 }
 html {
   font-size: 10px;
+
+  @media screen and (max-width: 2200px) {
+    font-size: 12px;
+  }
+
+  @include respond(desktop){
+    font-size: 9px;
+  }
+  @include respond(tab-land){
+    font-size: 9px;
+  }
+  @include respond(tab-port){
+    font-size: 8px;
+  }
+  @include respond(phone){
+    font-size: 7px;
+  }
 }
 
 body {
@@ -17,6 +36,10 @@ body {
   padding: 5rem;
   overflow-x: hidden;
   position: relative;
+
+  @include respond(phone){
+    padding: 10px;
+  }
 }
 a {
   text-decoration: none !important;
@@ -61,6 +84,13 @@ body {
   left: 50%;
   top: 50%;
 }
+
+@media screen and (max-width: 400px) {
+  .xxs{
+    width: 100%!important;
+  }
+}
+
 
 @-webkit-keyframes spin {
   0% {
