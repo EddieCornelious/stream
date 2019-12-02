@@ -134,18 +134,30 @@ class App extends React.Component {
 
   displayStreams() {
     const streams = this.state.topStreams;
+    const self = this;
     this.setState({
       mode: "topStreams",
-      activeData: streams
+      activeData: streams,
+      loadingData: true
     });
+
+    setTimeout(() => {
+      self.setState({ loadingData: false });
+    }, 100);
   }
 
   displayGames() {
     const games = this.state.topGames;
+    const self = this;
     this.setState({
       mode: "topGames",
-      activeData: games
+      activeData: games,
+      loadingData: true
     });
+
+    setTimeout(() => {
+      self.setState({ loadingData: false });
+    }, 100);
   }
 
   showStream(streamerName) {

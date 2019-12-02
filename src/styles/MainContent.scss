@@ -1,9 +1,16 @@
 .main__sidebar {
   background: #0c0f26;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   width: 20%;
   float: left;
   height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
   font-size: 1.6rem;
 }
@@ -21,6 +28,9 @@
   height: 100%;
   width: auto;
   padding: 3rem 3rem 15rem 3rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   position: relative;
   min-height: 100vh;
@@ -43,6 +53,7 @@ a.sidebar__link {
   margin: 1rem;
   width: 90%;
   cursor: pointer;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
   border-radius: 1rem;
@@ -50,12 +61,20 @@ a.sidebar__link {
 
 .game__card__top {
   height: 80%;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  -o-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.02, 1.02);
+    -webkit-transform: scale(1.02, 1.02);
+        -ms-transform: scale(1.02, 1.02);
+            transform: scale(1.02, 1.02);
   }
   img {
+    -o-object-fit: cover;
     object-fit: cover;
+    -o-object-position: center;
     object-position: center;
     width: 100%;
     height: 100%;
@@ -88,6 +107,8 @@ a.sidebar__link {
   position: absolute;
   bottom: 0;
   left: 50%;
+  -webkit-transform: translate(-50%);
+  -ms-transform: translate(-50%);
   transform: translate(-50%);
 }
 
@@ -107,7 +128,9 @@ a.sidebar__link {
   img {
     width: 100%;
     height: 100%;
+    -o-object-fit: cover;
     object-fit: cover;
+    -o-object-position: center;
     object-position: center;
   }
 }
@@ -117,6 +140,7 @@ a.sidebar__link {
   height: 20%;
   padding-top: 1rem;
   img {
+    -o-object-fit: contain;
     object-fit: contain;
     width: 100%;
     height: 100%;

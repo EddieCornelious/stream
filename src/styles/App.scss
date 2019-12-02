@@ -24,22 +24,28 @@ a {
 
 html,
 body {
+  -webkit-transition: scrollTo 3s ease;
+  -o-transition: scrollTo 3s ease;
   transition: scrollTo 3s ease;
   width: 100%;
   height: 100%;
 }
 
 .loader:empty {
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid black;
+  border: 1.6rem solid #f3f3f3;
+  border-top: 1.6rem solid black;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 12rem;
+  height: 12rem;
+  -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   position: absolute;
-  left: calc(50% - 60px);
+  left: -webkit-calc(50% - 6rem);
+  left: calc(50% - 6rem);
   margin: 0 auto;
   top: 30%;
+  -webkit-transform: translate(-100%, 0);
+  -ms-transform: translate(-100%, 0);
   transform: translate(-100%, 0);
 }
 
@@ -49,25 +55,69 @@ body {
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   position: absolute;
   left: 50%;
   top: 50%;
 }
 
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 @keyframes spin {
   0% {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 @keyframes load8 {
   0% {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 1.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px grey;
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0c0f26;
+  border-radius: 1rem;
 }
