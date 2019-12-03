@@ -46,6 +46,7 @@ class App extends React.Component {
       let cur = data[i];
       if (!seen[cur.name]) {
         newArr.push(cur);
+        seen[cur.name] = true;
       }
     }
     return newArr;
