@@ -237,7 +237,7 @@ class App extends React.Component {
       return;
     }
     const dataToFilterProp =
-      this.state.mode === "topGames" ? "topGames" : "topStreams";
+      this.state.mode === "topGames" ? "activeData" : "topStreams";
     const dataToFilter = this.state[dataToFilterProp.toString()];
     const contentProp = this.state.mode === "topGames" ? "name" : "game_played";
 
