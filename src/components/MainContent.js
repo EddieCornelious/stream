@@ -165,11 +165,11 @@ const MainContent = ({
                 toggleStreamVideo
               )}
         </div>
-        {mode === "topGames" && (
+        {mode === "topGames" ? (
           <a onClick={() => loadMore()} href="#" className="load__more">
             load more
           </a>
-        )}
+        ) : null}
       </div>
     </div>
   );
