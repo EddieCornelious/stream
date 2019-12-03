@@ -45,7 +45,7 @@ class App extends React.Component {
     }
     const generator = genGameViews();
     this.fetchGames(
-      "https://api.twitch.tv/helix/games/top?first=10&after=" + this.cursor
+      "https://api.twitch.tv/helix/games/top?first=20&after=" + this.cursor
     ).then(games => {
       this.cursor = games.pagination.cursor;
       games.data.forEach(game => {
@@ -60,7 +60,7 @@ class App extends React.Component {
   }
 
   fetchGames(url) {
-    return fetch(url || "https://api.twitch.tv/helix/games/top?first=100", {
+    return fetch(url || "https://api.twitch.tv/helix/games/top?first=50", {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
       }
@@ -71,10 +71,10 @@ class App extends React.Component {
 
   fetchStreams(gameId) {
     const withID =
-      "https://api.twitch.tv/helix/streams?first=100&game_id=" + gameId;
+      "https://api.twitch.tv/helix/streams?first=50&game_id=" + gameId;
     const url = gameId
       ? withID
-      : "https://api.twitch.tv/helix/streams?first=100";
+      : "https://api.twitch.tv/helix/streams?first=50";
     return fetch(url, {
       headers: {
         "Client-ID": process.env.REACT_APP_TWITCH_CLIENT_ID
