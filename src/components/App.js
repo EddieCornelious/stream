@@ -39,6 +39,18 @@ class App extends React.Component {
     window.addEventListener("scroll", scrollCheck, false);
   }
 
+  removeDuplicates(data) {
+    let seen = {};
+    let newArr = [];
+    for (let i = 0; i < data.length; i++) {
+      let cur = data[i];
+      if (!seen[cur.name]) {
+        newArr.push(cur);
+      }
+    }
+    return newArr;
+  }
+
   loadMore() {
     if (this.state.mode !== "topGames") {
       return;
@@ -52,8 +64,9 @@ class App extends React.Component {
         this.gameIdMap[game.id] = game.name;
         game.viewers = generator.gen();
       });
+      let removedDup = this.removeDuplicates(games.data);
       this.setState({
-        activeData: [...this.state.activeData, ...games.data.slice(0)]
+        activeData: [...this.state.activeData, ...removedDup]
       });
     });
   }
@@ -262,6 +275,7 @@ class App extends React.Component {
     if (this.state.loadingApp) {
       return null;
     }
+    console.log(this.state.activeData);
 
     return (
       <React.Fragment>
