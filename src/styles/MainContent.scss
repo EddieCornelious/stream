@@ -57,6 +57,11 @@
     -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
     text-transform: uppercase;
+    display: none;
+
+    @include respond(tab-land){
+      display: inline-block;
+    }
   }
 
   @include respond(phone) {
