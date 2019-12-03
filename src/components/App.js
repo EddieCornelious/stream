@@ -65,9 +65,9 @@ class App extends React.Component {
         this.gameIdMap[game.id] = game.name;
         game.viewers = generator.gen();
       });
-      let removedDup = this.removeDuplicates(games.data);
+
       this.setState({
-        activeData: [...this.state.activeData, ...removedDup]
+        activeData: [...this.state.activeData, ...games.data]
       });
     });
   }
@@ -276,7 +276,10 @@ class App extends React.Component {
     if (this.state.loadingApp) {
       return null;
     }
-    console.log(this.state.activeData);
+    let noDupclitates;
+    if (this.state.mode === "topGames") {
+      noDupclitates = this.removeDuplicates(this.state.activeData);
+    }
 
     return (
       <React.Fragment>
@@ -293,7 +296,7 @@ class App extends React.Component {
           loadMore={this.loadMore.bind(this)}
           toggleStreamVideo={this.showStream.bind(this)}
           currentPage={this.state.currentPage}
-          data={this.state.activeData}
+          data={noDupclitates || this.state.activeData}
           displayStreams={this.displayStreams.bind(this)}
           mode={this.state.mode}
           displayGames={this.displayGames.bind(this)}
