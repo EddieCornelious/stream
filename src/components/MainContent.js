@@ -139,7 +139,8 @@ const MainContent = ({
   displayGames,
   displayCertainStreams,
   toggleStreamVideo,
-  loadingData
+  loadingData,
+  loadMore
 }) => {
   return (
     <div className="container-fluid main">
@@ -164,6 +165,11 @@ const MainContent = ({
                 toggleStreamVideo
               )}
         </div>
+        {mode === "topGames" && (
+          <a onClick={() => loadMore()} href="#" className="load__more">
+            load more
+          </a>
+        )}
       </div>
     </div>
   );

@@ -32,18 +32,17 @@ class App extends React.Component {
         window.innerHeight + window.scrollY >=
         document.querySelector(".main__video__container").offsetHeight
       ) {
-        if (this.state.mode === "topGames") {
-          this.loadMore();
-        }
+        this.loadMore();
       }
     }, 100);
 
     window.addEventListener("scroll", scrollCheck, false);
-
-    window.addEventListener("touchmove", scrollCheck, false);
   }
 
   loadMore() {
+    if (this.state.mode !== "topGames") {
+      return;
+    }
     const generator = genGameViews();
     this.fetchGames(
       "https://api.twitch.tv/helix/games/top?first=10&after=" + this.cursor
@@ -277,6 +276,7 @@ class App extends React.Component {
           closeStream={this.closeStream.bind(this)}
         />
         <MainContent
+          loadMore={this.loadMore.bind(this)}
           toggleStreamVideo={this.showStream.bind(this)}
           currentPage={this.state.currentPage}
           data={this.state.activeData}
