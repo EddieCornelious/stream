@@ -53,8 +53,7 @@ class App extends React.Component {
         game.viewers = generator.gen();
       });
       this.setState({
-        topGames: [...this.state.topGames, ...games.data],
-        activeData: [...this.state.activeData, ...games.data]
+        activeData: [...this.state.activeData, ...games.data.slice(0)]
       });
     });
   }
