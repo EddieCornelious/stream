@@ -86,7 +86,7 @@ a.sidebar__link {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 10px;
 
   @include respond(phone) {
     width: 100%;

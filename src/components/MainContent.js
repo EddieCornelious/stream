@@ -15,7 +15,7 @@ const GameCardRow = ({
         {data.map((content, i) => {
           const url = content.thumbnail_url;
           return (
-            <div key={i} className="col-sm-6 col-lg-4">
+            <div key={i} className="col-md-6 col-lg-4">
               <StreamCard
                 toggleStreamVideo={toggleStreamVideo}
                 key={content.stream_id}
@@ -40,7 +40,7 @@ const GameCardRow = ({
       {data.map((content, i) => {
         const url = content.box_art_url;
         return (
-          <div key={i} className="xxs col-xs-6 col-md-4 col-lg-3">
+          <div key={i} className="xxs col-sm-4 col-lg-3">
             <GameCard
               id={content.id}
               displayStreams={displayStreams}
