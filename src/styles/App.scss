@@ -31,11 +31,12 @@ html {
 }
 
 body {
-  background: #7678fb;
+background-color: #7775a5;
   color: #7678fb;
   padding: 5rem;
   overflow-x: hidden;
   position: relative;
+  font-family: Open Sans,"Lucida Grande", Tahoma, Sans-Serif;
 
   @include respond(phone) {
     padding: 10px;
@@ -52,6 +53,7 @@ body {
   transition: scrollTo 3s ease;
   width: 100%;
   height: 100%;
+
 }
 
 .loader:empty {
