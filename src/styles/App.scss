@@ -31,12 +31,12 @@ html {
 }
 
 body {
-background-color: #7775a5;
+  background-color: #7775a5;
   color: #7678fb;
   padding: 5rem;
   overflow-x: hidden;
   position: relative;
-  font-family: Open Sans,"Lucida Grande", Tahoma, Sans-Serif;
+  font-family: Open Sans, "Lucida Grande", Tahoma, Sans-Serif;
 
   @include respond(phone) {
     padding: 10px;
@@ -53,25 +53,23 @@ body {
   transition: scrollTo 3s ease;
   width: 100%;
   height: 100%;
-
 }
 
 .loader:empty {
-  border: 1.6rem solid #f3f3f3;
-  border-top: 1.6rem solid black;
+  border: 1rem solid #f3f3f3;
+  border-top: 1rem solid #7678fb;
   border-radius: 50%;
-  width: 8rem;
-  height: 8rem;
+  width: 6rem;
+  height: 6rem;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   position: absolute;
-  left: -webkit-calc(50% - 4rem);
-  left: calc(50% - 4rem);
+  left: 50%;
   margin: 0 auto;
-  top: 30%;
-  -webkit-transform: translate(-100%, 0);
-  -ms-transform: translate(-100%, 0);
-  transform: translate(-100%, 0);
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .loader__small:empty {
