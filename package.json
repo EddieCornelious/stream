@@ -11,7 +11,7 @@
     "gh-pages": "^2.1.1",
     "lodash.debounce": "^4.0.8",
     "netlify-cli": "^2.21.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-lines-ellipsis": "^0.14.1",
