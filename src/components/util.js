@@ -1,20 +1,3 @@
-export function toKViewers(num) {
-  if (num < 1000) {
-    return num;
-  }
-  let toStr = num.toString();
-  if (num >= 1000 && num < 10000) {
-    return toStr.substring(0, 1) + "." + toStr[1] + "K";
-  }
-  if (num >= 10000 && num < 100000) {
-    return toStr.substring(0, 2) + "." + toStr[2] + "K";
-  }
-  if (num >= 100000) {
-    return toStr.substring(0, 3) + "." + toStr[3] + "K";
-  }
-  return "100K+";
-}
-
 export function mergesort(a, compare) {
   let aLen = a.length;
   if (aLen === 1) {
@@ -45,31 +28,4 @@ function merge(a, b, compare) {
   }
 
   return c;
-}
-
-export function genGameViews() {
-  let state = 100000;
-  let calls = 0;
-  function cancel() {
-    state = 100000;
-  }
-
-  function gen() {
-    calls++;
-    if (calls <= 4) {
-      return Math.floor(56000 + Math.random() * 70000);
-    }
-    if (calls <= 25) {
-      return Math.floor(25000 + Math.random() * 47000);
-    }
-
-    if (calls <= 50) {
-      return Math.floor(15000 + Math.random() * 28000);
-    }
-    return Math.floor(1 + Math.random() * 12000);
-  }
-  return {
-    gen,
-    cancel
-  };
 }
