@@ -70,11 +70,12 @@ body {
 }
 
 .dashboard {
+  position: relative;
   max-width: 1500px;
   overflow: auto;
   background-color: #171934;
   min-height: 85vh;
-  margin: 6rem 20rem;
+  margin: 6rem 15rem;
   -webkit-border-top-right-radius: 1.5rem;
   -moz-border-radius-topright: 1.5rem;
   border-top-right-radius: 1.5rem;
@@ -136,18 +137,11 @@ body {
       padding: 0.5rem;
       color: gold;
     }
-    span.filter {
-      background-color: #1c223a;
-      padding: 0.5rem 4rem 0.5rem 0.5rem;
-      -webkit-border-radius: 0.5rem;
-      -moz-border-radius: 0.5rem;
-      border-radius: 0.3rem;
-    }
   }
 
   .sidebar__wrap {
     height: 100%;
-    width: 15%;
+    width: 20%;
     min-height: 85vh;
     float: left;
   }
@@ -155,7 +149,6 @@ body {
   &__sidebar {
     &::-webkit-scrollbar {
       width: 10px;
-      background-color: red;
     }
     &::-webkit-scrollbar-track {
       width: 10px;
@@ -173,12 +166,18 @@ body {
     &__list {
       list-style-type: none;
       text-transform: uppercase;
-      font-size: 1.2rem;
-      font-size: 1rem;
       li {
+        -webkit-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        -moz-transition: background-color 0.5s;
+        transition: background-color 0.5s;
         display: block;
         padding: 1.5rem 3rem;
         cursor: pointer;
+        font-weight: 600;
+        &:hover {
+          background-color: #0c0f26;
+        }
       }
     }
   }
@@ -187,17 +186,65 @@ body {
 .content__wrap {
   float: right;
 
-  width: 85%;
+  width: 80%;
 }
 
 .moviecard {
-  height: 300px;
+  height: 350px;
   width: 20%;
   display: inline-block;
-  background-color: green;
+  background-color: white;
   margin: 2rem;
+  -webkit-border-radius: 0.8rem;
+  -moz-border-radius: 0.8rem;
+  border-radius: 0.8rem;
 }
 
-.dashboard__sidebar__footer {
-  background-color: purple;
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #1c223a;
+  padding: 0.5rem 4rem 0.5rem 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  border-radius: 0.3rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1c223a;
+  width: 100%;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  font-weight: 600;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: inherit;
+  padding: 0.5rem;
+  text-decoration: none;
+  display: block;
+  text-transform: capitalize;
+  font-weight: inherit;
+  &:hover {
+    background-color: #0c0f26;
+  }
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }

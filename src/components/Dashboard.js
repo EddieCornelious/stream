@@ -20,7 +20,14 @@ export default class Dashboard extends Component {
         <div className="dashboard__top">
           <span className="title">dashboard box</span>
           <input placeholder="Search Movies..." type="text" />
-          <span className="filter">popularity</span>
+          <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+              <a href="#">popularity</a>
+              <a href="#">top rated</a>
+              <a href="#">now playing</a>
+            </div>
+          </div>
         </div>
         <div className="sidebar__wrap">
           <div className="dashboard__sidebar">
