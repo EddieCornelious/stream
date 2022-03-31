@@ -1,0 +1,203 @@
+//@import "variables";
+@import 'responsive.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+html {
+  font-size: 10px;
+
+  @media screen and (max-width: 2200px) {
+    font-size: 12px;
+  }
+
+  @include respond(desktop) {
+    font-size: 9px;
+  }
+  @include respond(tab-land) {
+    font-size: 9px;
+  }
+  @include respond(tab-port) {
+    font-size: 8px;
+  }
+  @include respond(phone) {
+    font-size: 7px;
+  }
+}
+
+body {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(#7775a5),
+    to(#3c3b66)
+  );
+  background-image: -webkit-linear-gradient(left top, #7775a5, #3c3b66);
+  background-image: -moz-linear-gradient(left top, #7775a5, #3c3b66);
+  background-image: -o-linear-gradient(left top, #7775a5, #3c3b66);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(#7775a5),
+    to(#3c3b66)
+  );
+  color: #7678fb;
+  overflow-x: hidden;
+  position: relative;
+  font-family: Open Sans, 'Lucida Grande', Tahoma, Sans-Serif;
+
+  /**@include respond(phone) {
+    padding: 10px;
+  }**/
+}
+a {
+  text-decoration: none !important;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.dashboard {
+  max-width: 1500px;
+  overflow: auto;
+  background-color: #171934;
+  min-height: 85vh;
+  margin: 6rem 20rem;
+  -webkit-border-top-right-radius: 1.5rem;
+  -moz-border-radius-topright: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  -webkit-border-top-left-radius: 1.5rem;
+  -moz-border-radius-topleft: 1.5rem;
+  border-top-left-radius: 1.5rem;
+  -webkit-box-shadow: 0 2rem 6rem rgb(0 0 0 / 30%);
+  -moz-box-shadow: 0 2rem 6rem rgb(0 0 0 / 30%);
+  box-shadow: 0 2rem 6rem rgb(0 0 0 / 30%);
+
+  &__top {
+    text-transform: capitalize;
+    background-color: #0c0f26;
+    -webkit-border-top-right-radius: 1.5rem;
+    -moz-border-radius-topright: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    -webkit-border-top-left-radius: 1.5rem;
+    -moz-border-radius-topleft: 1.5rem;
+    border-top-left-radius: 1.5rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    input {
+      width: 45%;
+      background: #1c223a;
+      -webkit-border-radius: 1rem;
+      -moz-border-radius: 1rem;
+      border-radius: 1rem;
+      padding: 0.4rem 0.4rem 0.4rem 1rem;
+      border-style: none;
+      -webkit-transition: width 0.2s ease-in-out;
+      -o-transition: width 0.2s ease-in-out;
+      -moz-transition: width 0.2s ease-in-out;
+      transition: width 0.2s ease-in-out;
+      &:focus {
+        width: 50%;
+      }
+    }
+    span {
+      display: inline-block;
+      padding: 1rem;
+    }
+    span.title {
+      border-color: gold;
+      border-style: groove;
+      padding: 0.5rem;
+      color: gold;
+    }
+    span.filter {
+      background-color: #1c223a;
+      padding: 0.5rem 4rem 0.5rem 0.5rem;
+      -webkit-border-radius: 0.5rem;
+      -moz-border-radius: 0.5rem;
+      border-radius: 0.3rem;
+    }
+  }
+
+  .sidebar__wrap {
+    height: 100%;
+    width: 15%;
+    min-height: 85vh;
+    float: left;
+  }
+
+  &__sidebar {
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: red;
+    }
+    &::-webkit-scrollbar-track {
+      width: 10px;
+      background-color: #4d4d5c;
+    }
+    &::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+    }
+
+    padding-top: 2rem;
+    width: 100%;
+    max-height: 45vh;
+    overflow-y: scroll;
+    &__list {
+      list-style-type: none;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-size: 1rem;
+      li {
+        display: block;
+        padding: 1.5rem 3rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.content__wrap {
+  float: right;
+
+  width: 85%;
+}
+
+.moviecard {
+  height: 300px;
+  width: 20%;
+  display: inline-block;
+  background-color: green;
+  margin: 2rem;
+}
+
+.dashboard__sidebar__footer {
+  background-color: purple;
+}
