@@ -11,15 +11,10 @@
   -moz-osx-font-smoothing: grayscale !important;
 }
 html {
-  @include respond(4k) {
-    font-size: 62.5%;
-  }
+  font-size: 62.5%;
 
   @include respond(desktop) {
     font-size: 9px;
-  }
-  @include respond(tab-land) {
-    font-size: 8px;
   }
 }
 
@@ -57,13 +52,11 @@ a {
 html,
 body {
   width: 100%;
-  height: 100%;
-  overflow: auto;
 }
 
 .dashboard {
   position: relative;
-  max-width: 1500px;
+  max-width: 120rem;
   overflow: auto;
   background-color: #171934;
   min-height: 85vh;
@@ -180,19 +173,6 @@ body {
   float: right;
 
   width: 85%;
-}
-
-.moviecard {
-  height: 350px;
-  width: -webkit-calc(20% - 0.5rem);
-  width: -moz-calc(20% - 0.5rem);
-  width: calc(20% - 0.5rem);
-  display: inline-block;
-  background-color: white;
-  margin: 2rem;
-  -webkit-border-radius: 0.8rem;
-  -moz-border-radius: 0.8rem;
-  border-radius: 0.8rem;
 }
 
 /* Style The Dropdown Button */

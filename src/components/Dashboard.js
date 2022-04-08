@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import MovieCard from './MovieCard';
-
+import Pagination from './Pagination';
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -55,7 +55,10 @@ export default class Dashboard extends Component {
           </div>
         </div>
 
-        <div className="content__wrap">{this.initialLoad()}</div>
+        <div className="content__wrap">
+          {this.initialLoad()}
+          <Pagination />
+        </div>
       </div>
     );
   }

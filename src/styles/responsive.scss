@@ -1,12 +1,6 @@
 @mixin respond($breakpoint) {
-  @if $breakpoint == 4k {
-    @media screen and (max-width: 1920px) {
-      @content;
-    }
-  }
-
   @if $breakpoint == desktop {
-    @media screen and (max-width: 1400px) {
+    @media screen and (max-width: 1600px) {
       @content;
     }
   }
