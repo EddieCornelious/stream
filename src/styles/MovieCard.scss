@@ -1,10 +1,12 @@
 .moviecard {
   height: 35rem;
   display: inline-block;
-  margin: 3rem;
   border-style: solid;
   border-color: #171934;
   text-transform: capitalize;
+  max-width: 25%;
+  margin: 2rem;
+  cursor: pointer;
 
   img {
     -webkit-transform: translateZ(0);

@@ -21,7 +21,7 @@ export default class Dashboard extends Component {
           <span className="title">dashboard box</span>
           <input placeholder="Search Movies..." type="text" />
           <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
+            <button class="dropbtn">popularity</button>
             <div class="dropdown-content">
               <a href="#">popularity</a>
               <a href="#">top rated</a>
