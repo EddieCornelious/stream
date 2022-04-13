@@ -9,8 +9,8 @@ export default class Dashboard extends Component {
 
   initialLoad() {
     const movies = [];
-    for (let i = 0; i < 25; i++) {
-      movies.push(<MovieCard />);
+    for (let i = 0; i < 8; i++) {
+      movies.push(<MovieCard id={i} />);
     }
     return movies;
   }

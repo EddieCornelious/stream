@@ -1,11 +1,10 @@
 .moviecard {
-  height: 35rem;
+  max-height: 25rem;
   display: inline-block;
   border-style: solid;
   border-color: #171934;
   text-transform: capitalize;
-  max-width: 25%;
-  margin: 2rem;
+  margin: 2rem 0rem 2rem 2rem;
   cursor: pointer;
 
   img {
@@ -15,7 +14,7 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    max-width: 25rem;
+    max-width: 20rem;
   }
   .moviecard__title {
     margin-top: 10px;
