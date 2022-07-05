@@ -19,6 +19,7 @@ html {
 }
 
 body {
+  font-family: Montserrat, sans-serif;
   background-image: -webkit-gradient(
     linear,
     left top,
@@ -39,7 +40,7 @@ body {
   color: #7678fb;
   overflow-x: hidden;
   position: relative;
-  font-family: Open Sans, 'Lucida Grande', Tahoma, Sans-Serif;
+
   font-size: 1.6rem;
   /**@include respond(phone) {
     padding: 10px;
@@ -47,6 +48,7 @@ body {
 }
 a {
   text-decoration: none !important;
+  color: inherit;
 }
 
 html,
