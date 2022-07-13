@@ -21,7 +21,7 @@ export default class Pagination extends Component {
     }
 
     e.preventDefault();
-    console.log(this.state);
+
     document
       .getElementById(this.state.currentActive)
       .classList.remove('active');

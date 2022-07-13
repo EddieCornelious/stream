@@ -18,6 +18,10 @@
   -ms-flex-pack: center;
   justify-content: center;
   padding: 2rem 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
 
   a {
     text-align: center;
