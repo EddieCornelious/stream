@@ -32,38 +32,18 @@ class App extends Component {
   }
 
   sortBy = (type) => {
-    //console.log(type);
-    if (parseInt(type) === this.state.activeSort) return;
+    const sorts = { 1: 'popularity', 2: 'vote_average', 3: 'title' };
+    if (Object.keys(sorts).indexOf(type.toString()) === -1) return;
     this.setState({ alteringMovies: true }, () => {
-      if (type === 1) {
-        const res = this.state.filteredMovies
-          .slice(0)
-          .sort(Compare('popularity', false));
-        this.setState(
-          {
-            filteredMovies: res,
-          },
-          () => this.setState({ alteringMovies: false, activeSort: 1 })
-        );
-      } else if (type === 2) {
-        const res = this.state.filteredMovies
-          .slice(0)
-          .sort(Compare('vote_average', false));
-        this.setState(
-          {
-            filteredMovies: res,
-          },
-          () => this.setState({ alteringMovies: false, activeSort: 2 })
-        );
-      } else if (type === 3) {
-        const res = this.state.filteredMovies.slice(0).sort(Compare('title'));
-        this.setState(
-          {
-            filteredMovies: res,
-          },
-          () => this.setState({ alteringMovies: false, activeSort: 3 })
-        );
-      }
+      const res = this.state.filteredMovies
+        .slice(0)
+        .sort(Compare(sorts[type], type === 3 ? true : false));
+      this.setState(
+        {
+          filteredMovies: res,
+        },
+        () => this.setState({ alteringMovies: false, activeSort: type })
+      );
     });
   };
 
