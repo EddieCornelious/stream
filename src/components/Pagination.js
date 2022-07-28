@@ -15,19 +15,25 @@ export default class Pagination extends Component {
     if (callback) return callback();
   }
 
+  displayPagination = (active) => {
+    const pages = [];
+    for (let i = 1; i < 11; i++) {
+      pages.push(
+        <a className={i === this.props.page ? 'active' : ''} id={i} href="#">
+          {i}
+        </a>
+      );
+    }
+    return pages;
+  };
+
   onPageClick = (e) => {
     if (e.target.localName !== 'a') {
       return;
     }
 
     e.preventDefault();
-
-    document
-      .getElementById(this.state.currentActive)
-      .classList.remove('active');
-    this.setState({ currentActive: e.target.id }, function (state) {
-      e.target.classList.add('active');
-    });
+    this.props.changePage(e.target.id);
 
     this.scroll({
       top: 0,
@@ -38,24 +44,7 @@ export default class Pagination extends Component {
   render() {
     return (
       <div onClick={this.onPageClick} className="movie__paginator">
-        <a className="active" id="1" href="#">
-          1
-        </a>
-        <a id="2" href="#">
-          1
-        </a>
-        <a id="3" href="#">
-          1
-        </a>
-        <a id="4" href="#">
-          1
-        </a>
-        <a id="5" href="#">
-          1
-        </a>
-        <a id="5" href="#">
-          1
-        </a>
+        {this.displayPagination()}
       </div>
     );
   }

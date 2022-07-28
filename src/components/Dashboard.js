@@ -38,6 +38,8 @@ export default function Dashboard({
   genreList,
   updateSearch,
   search,
+  page,
+  changePage,
 }) {
   return (
     <div className="dashboard">
@@ -49,9 +51,9 @@ export default function Dashboard({
           placeholder="Search Movies..."
           type="text"
         />
-        <div class="dropdown">
-          <button class="dropbtn">{sortTypes[parseInt(activeSort)]}</button>
-          <div class="dropdown-content">
+        <div className="dropdown">
+          <button className="dropbtn">{sortTypes[parseInt(activeSort)]}</button>
+          <div className="dropdown-content">
             <a href="#" onClick={() => sortBy(1)}>
               popularity
             </a>
@@ -71,7 +73,7 @@ export default function Dashboard({
           </ul>
         </div>
       </div>
-      <Pagination />
+      <Pagination page={page} changePage={changePage} />
       <div className="content__wrap">
         {alteringMovies === true ? (
           <div className="loading">LOADING</div>

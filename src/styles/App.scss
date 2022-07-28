@@ -20,23 +20,7 @@ html {
 
 body {
   font-family: Montserrat, sans-serif;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right bottom,
-    from(#7775a5),
-    to(#3c3b66)
-  );
-  background-image: -webkit-linear-gradient(left top, #7775a5, #3c3b66);
-  background-image: -moz-linear-gradient(left top, #7775a5, #3c3b66);
-  background-image: -o-linear-gradient(left top, #7775a5, #3c3b66);
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right bottom,
-    from(#7775a5),
-    to(#3c3b66)
-  );
+
   color: #7678fb;
   overflow-x: hidden;
   position: relative;
@@ -178,15 +162,6 @@ body {
   width: 85%;
   min-height: 100vh;
   padding-bottom: 15rem;
-
-  .loading {
-    background-color: pink;
-    width: 100vw;
-    z-index: 1000;
-    position: absolute;
-    top: 50%;
-    height: 10vh;
-  }
 }
 
 /* Style The Dropdown Button */

@@ -27,6 +27,7 @@ class App extends Component {
     };
   }
   componentDidMount() {
+    console.log(this.state.page);
     this.initialLoad();
     smoothscroll.polyfill();
   }
@@ -49,6 +50,7 @@ class App extends Component {
 
   filterMovies = (e) => {
     const filter = parseInt(e.target.id);
+
     this.setState({ alteringMovies: true }, () => {
       if (!this.state.genres[filter]) return;
       const filtered = this.state.currentMovies.filter(
@@ -85,11 +87,33 @@ class App extends Component {
     return callback(mappedGenres);
   };
 
+  changePage = (newPage) => {
+    this.setState({ alteringMovies: true }, () => {
+      this.fetchTrending(newPage).then((movies) => {
+        const newMovies = movies.data.results;
+        this.setState(
+          {
+            currentMovies: newMovies,
+            filteredMovies: newMovies,
+            filteredGenre: newMovies,
+            page: parseInt(newPage),
+            activeSort: 1,
+            activeFilter: null,
+          },
+          () => {
+            this.setState({ alteringMovies: false });
+          }
+        );
+      });
+    });
+  };
   updateSearch = (e) => {};
 
   search = (term) => {};
 
   initialLoad() {
+    if (this.state.currentMovies.length !== 0) return;
+
     this.setState({ isLoading: true }, () => {
       Promise.all([this.fetchTrending(), this.fetchGenres()]).then((data) =>
         this.mapGenres(data[1].data.genres, (mappedGenres) => {
@@ -109,18 +133,7 @@ class App extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return (
-        <div
-          style={{
-            margin: '0 auto',
-            color: 'red',
-            width: '100vw',
-            fontSize: '100px',
-          }}
-        >
-          LOADING...
-        </div>
-      );
+      return null;
     }
 
     return (
@@ -143,6 +156,8 @@ class App extends Component {
                   filterMovies={this.filterMovies}
                   updateSearch={this.updateSearch}
                   search={this.search}
+                  page={this.state.page}
+                  changePage={this.changePage}
                 />
               }
             />
