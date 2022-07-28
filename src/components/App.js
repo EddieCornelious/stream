@@ -67,15 +67,15 @@ class App extends Component {
     );
   }
 
-  fetchGenres() {
+  fetchGenres = () => {
     return axios.get(
       'https://api.themoviedb.org/3/genre/movie/list?api_key=' +
         process.env.REACT_APP_API_KEY +
         '&language=en-US'
     );
-  }
+  };
 
-  mapGenres(results, callback) {
+  mapGenres = (results, callback) => {
     const genres = results || [];
     const mappedGenres = {};
     for (let i = 0; i < genres.length; i++) {
@@ -83,7 +83,11 @@ class App extends Component {
       mappedGenres[genre.id] = genre.name;
     }
     return callback(mappedGenres);
-  }
+  };
+
+  updateSearch = (e) => {};
+
+  search = (term) => {};
 
   initialLoad() {
     this.setState({ isLoading: true }, () => {
@@ -105,7 +109,18 @@ class App extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return <h1>LOADING...................</h1>;
+      return (
+        <div
+          style={{
+            margin: '0 auto',
+            color: 'red',
+            width: '100vw',
+            fontSize: '100px',
+          }}
+        >
+          LOADING...
+        </div>
+      );
     }
 
     return (
@@ -126,6 +141,8 @@ class App extends Component {
                   activeSort={this.state.activeSort}
                   genreList={this.state.genreList}
                   filterMovies={this.filterMovies}
+                  updateSearch={this.updateSearch}
+                  search={this.search}
                 />
               }
             />

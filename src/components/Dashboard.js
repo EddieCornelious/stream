@@ -36,12 +36,19 @@ export default function Dashboard({
   isLoading,
   filterMovies,
   genreList,
+  updateSearch,
+  search,
 }) {
   return (
     <div className="dashboard">
       <div className="dashboard__top">
         <span className="title">dashboard box</span>
-        <input placeholder="Search Movies..." type="text" />
+        <input
+          onChange={updateSearch}
+          onKeyDown={search}
+          placeholder="Search Movies..."
+          type="text"
+        />
         <div class="dropdown">
           <button class="dropbtn">{sortTypes[parseInt(activeSort)]}</button>
           <div class="dropdown-content">
@@ -66,7 +73,11 @@ export default function Dashboard({
       </div>
       <Pagination />
       <div className="content__wrap">
-        {alteringMovies ? <h1>LOADING....</h1> : displayMovies(movies, genres)}
+        {alteringMovies === true ? (
+          <div className="loading">LOADING</div>
+        ) : (
+          displayMovies(movies, genres)
+        )}
       </div>
     </div>
   );

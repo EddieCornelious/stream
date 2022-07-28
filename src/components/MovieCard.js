@@ -5,7 +5,7 @@ export default function MovieCard({ title, imgSrc, id, genre }) {
   const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500/';
   return (
     <Fade delay={3000}>
-      <div className="moviecard">
+      <a href={'/movie/' + id} className="moviecard">
         <div className="moviecard__img__wrap">
           <img alt={title} src={IMG_BASE_URL + imgSrc} />
         </div>
@@ -14,7 +14,7 @@ export default function MovieCard({ title, imgSrc, id, genre }) {
           {title.length > 25 ? title.substring(0, 25) + '...' : title}
         </div>
         <div className="moviecard__type">{genre}</div>
-      </div>
+      </a>
     </Fade>
   );
 }
