@@ -1,0 +1,31 @@
+.moviecard {
+  max-height: 25rem;
+  display: inline-block;
+  border-style: solid;
+  border-color: #171934;
+  text-transform: capitalize;
+  margin: 2rem 0rem 2rem 2rem;
+  cursor: pointer;
+
+  img {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    max-width: 20rem;
+  }
+  .moviecard__title {
+    margin-top: 10px;
+    padding-left: 4px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #edf2f5;
+  }
+  .moviecard__type {
+    color: #737783;
+    margin-top: 2px;
+    padding-left: 4px;
+  }
+}

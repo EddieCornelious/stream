@@ -1,0 +1,49 @@
+.movie__paginator {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 2rem 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+
+  a {
+    text-align: center;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    font-size: 1.8rem;
+
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    color: #737783;
+
+    &:hover {
+      border: 1px solid #737783;
+    }
+  }
+}
+
+a.active {
+  border: 1px solid #7678fb;
+  color: #7678fb;
+}
