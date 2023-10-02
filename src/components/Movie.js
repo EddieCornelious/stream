@@ -104,9 +104,9 @@ class Movie extends React.Component {
               <span>
                 {displayGenres(movie.genres) + movie.release_date + ' / 122min'}
               </span>
-              <a href="#">Full Cast</a>
+              <a href={movie.homepage}>Full Cast</a>
               <div className="movie__poster__body__btn__group">
-                <a id="home" href="/movie">
+                <a id="home" href="/">
                   <House />
                 </a>
                 <a
