@@ -142,7 +142,7 @@ class App extends Component {
           <Routes>
             <Route
               exact
-              path="/movie"
+              path="/"
               element={
                 <Dashboard
                   movies={this.state.filteredMovies}
